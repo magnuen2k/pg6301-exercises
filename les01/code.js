@@ -22,42 +22,56 @@ let quizObj;
 let correctAnswer;
 
 
+
 const newGame = () => {
-    // Get a random quiz
-    let quizObj = getQuiz();
+    quizObj = getQuiz();
+    let answers = getButtons();
 
-    // Display question and answers
-    let question = quizObj.question;
+    // Display on page
+    outputQuiz.innerHTML = `
+        <h1>${quizObj.question}</h1>
+        <div>${answers}</div>
+    `;
+}
 
+// Get all answers in html button tags
+const getButtons = () => {
     let answers = "";
 
     Object.keys(quizObj).map(key => {
-        if (key.includes("answer")) {
-            answers += `<button onclick="checkAnswer(this)" id="${key.charAt(key.length-1)}">${quizObj[key]}</button>`;
+        if (key.includes("answer_")) {
+            answers += `<button onclick="checkAnswer(this)" id="${key.charAt(key.length - 1)}">${quizObj[key]}</button>`;
         }
 
         if (key.includes(quizObj.indexOfCorrectAnswer)) {
             correctAnswer = quizObj[key];
         }
     });
-
-    outputQuiz.innerHTML = `
-        <h1>${question}</h1>
-        <div>${answers}</div>
-    `;
+    return answers;
 }
 
+// Get a random quiz
 const getQuiz = () => {
     return quiz[Math.floor(Math.random() * 2)];
 }
 
 const checkAnswer = (e) => {
     if (e.innerHTML.toString() === correctAnswer.toString()) {
-        alert("correct");
-        newGame();
+        displayCorrect();
     } else {
-        alert("Try again");
+        displayWrong();
     }
+}
+
+const displayCorrect = () => {
+    // Could add more styling here
+    alert("correct");
+    newGame();
+}
+
+const displayWrong = () => {
+    // Could add more styling here
+    alert("Try again");
 }
 
 newGame();
