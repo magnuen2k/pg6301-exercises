@@ -21,8 +21,6 @@ const outputQuiz = document.getElementById("display-quiz");
 let quizObj;
 let correctAnswer;
 
-
-
 const newGame = () => {
     quizObj = getQuiz();
     let answers = getButtons();
