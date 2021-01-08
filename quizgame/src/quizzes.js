@@ -1,4 +1,4 @@
-const quiz = [
+const quizzes = [
     {
         question: "Whats nine plus ten?",
         answers: [30, 21, 19, 50],
@@ -18,5 +18,5 @@ const quiz = [
 
 // Should take number of quizzes as input
 export const getRandomQuiz = () => {
-    return quiz[Math.floor(Math.random() * quiz.length)];
+    return quizzes[Math.floor(Math.random() * quizzes.length)];
 }

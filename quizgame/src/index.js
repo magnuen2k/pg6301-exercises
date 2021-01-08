@@ -1,16 +1,16 @@
 import {getRandomQuiz} from "./quizzes";
 
 const outputQuiz = document.getElementById("display-quiz");
-let quizObj;
+let quiz;
 let correctAnswer;
 
 const newGame = () => {
-    quizObj = getRandomQuiz();
+    quiz = getRandomQuiz();
     let answers = getButtons();
 
     // Display on page
     outputQuiz.innerHTML = `
-        <h1>${quizObj.question}</h1>
+        <h1>${quiz.question}</h1>
         <div>${answers}</div>
     `;
 }
@@ -19,11 +19,11 @@ const newGame = () => {
 const getButtons = () => {
     let answers = "";
 
-    quizObj.answers.map((answer, index) => {
+    quiz.answers.map((answer, index) => {
         answers += `<button onclick="checkAnswer(this)" id="answer-${answer}">${answer}</button>`;
 
         // Set correct answer
-        if(index === quizObj.indexOfCorrectAnswer) {
+        if(index === quiz.indexOfCorrectAnswer) {
             correctAnswer = answer;
         }
     })
