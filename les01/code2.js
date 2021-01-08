@@ -1,21 +1,11 @@
 const quiz = [
     {
         question: "Whats nine plus ten?",
-        answer_0: 30,
-        answer_1: 21,
-        answer_2: 19,
-        answer_3: 42,
+        answers: [30, 21, 19, 50],
         indexOfCorrectAnswer: 1
     },
-    {
-        question: "Best CS:GO pro",
-        answer_0: "Brax",
-        answer_1: "Simple",
-        answer_2: "Coldzera",
-        answer_3: "M0E TV",
-        indexOfCorrectAnswer: 0
-    },
 ]
+
 
 const outputQuiz = document.getElementById("display-quiz");
 let quizObj;
@@ -36,15 +26,14 @@ const newGame = () => {
 const getButtons = () => {
     let answers = "";
 
-    Object.keys(quizObj).map(key => {
-        if (key.includes("answer_")) {
-            answers += `<button onclick="checkAnswer(this)" id="${key.charAt(key.length - 1)}">${quizObj[key]}</button>`;
-        }
+    quizObj.answers.map((answer, index) => {
+        answers += `<button onclick="checkAnswer(this)" id="answer-${answer}">${answer}</button>`;
 
-        if (key.includes(quizObj.indexOfCorrectAnswer)) {
-            correctAnswer = quizObj[key];
+        if(index === quizObj.indexOfCorrectAnswer) {
+            correctAnswer = answer;
         }
-    });
+    })
+
     return answers;
 }
 
