@@ -18,9 +18,11 @@
 }
 
 .question {
+    text-align: center;
     font-size: 1.5em;
     font-weight: bold;
 }
+
 
 .answer {
     background-color: #ebe9e4;
@@ -28,5 +30,9 @@
     padding: 1rem;
     border: 1px solid #787774;
     border-radius: 5px;
-    width: 80%;
+    width: 300px;
+}
+
+.score {
+    text-align: center;
 }

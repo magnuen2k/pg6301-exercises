@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { getRandomQuiz } from "./quizzes";
 
 // FUNCTIONAL COMPONENT VERSION
-const App = () => {
+/*const App = () => {
     const [quiz, setQuiz] = useState(getRandomQuiz(1)[0]);
     const [score, setScore] = useState(0);
 
@@ -18,9 +18,8 @@ const App = () => {
     };
 
     return (
-        <div>
-            <h2>{quiz.question}</h2>
-            <div className="anwers">
+        <div className="container">
+            <h2 className="question">{quiz.question}</h2>
                 {quiz.answers.map((answer, index) => (
                     <button
                         className="answer"
@@ -30,53 +29,50 @@ const App = () => {
                         {answer}
                     </button>
                 ))}
-            </div>
-            <div className="score">{score}</div>
+            <div className="score">Score: {score}</div>
         </div>
     );
-};
+};*/
 
 // CLASS COMPONENT VERSION
-// class App extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             quiz: getRandomQuiz(1)[0],
-//             score: 0,
-//         };
-//     }
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            quiz: getRandomQuiz(1)[0],
+            score: 0,
+        };
+    }
 
-//     checkAnswer(answerIndex) {
-//         if (answerIndex === this.state.quiz.indexOfCorrectAnswer) {
-//             alert("Correct!!");
-//             this.setState((prevState) => ({
-//                 quiz: getRandomQuiz(1)[0],
-//                 score: prevState.score + 1,
-//             }));
-//         } else {
-//             alert("Wrrrrong!!");
-//         }
-//     }
+    checkAnswer(answerIndex) {
+        if (answerIndex === this.state.quiz.indexOfCorrectAnswer) {
+            alert("Correct!!");
+            this.setState((prevState) => ({
+                quiz: getRandomQuiz(1)[0],
+                score: prevState.score + 1,
+            }));
+        } else {
+            alert("Wrrrrong!!");
+        }
+    }
 
-//     render() {
-//         return (
-//             <div>
-//                 <h2>{this.state.quiz.question}</h2>
-//                 <div className="anwers">
-//                     {this.state.quiz.answers.map((answer, index) => (
-//                         <button
-//                             className="answer"
-//                             key={index}
-//                             onClick={() => this.checkAnswer(index)}
-//                         >
-//                             {answer}
-//                         </button>
-//                     ))}
-//                 </div>
-//                 <div className="score">{this.state.score}</div>
-//             </div>
-//         );
-//     }
-// }
+    render() {
+        return (
+            <div className="container">
+                <h2>{this.state.quiz.question}</h2>
+                    {this.state.quiz.answers.map((answer, index) => (
+                        <button
+                            className="answer"
+                            key={index}
+                            onClick={() => this.checkAnswer(index)}
+                        >
+                            {answer}
+                        </button>
+                    ))}
+                <div className="score">Score: {this.state.score}</div>
+            </div>
+        );
+    }
+}
 
 ReactDOM.render(<App />, document.getElementById("root"));
