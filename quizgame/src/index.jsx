@@ -8,7 +8,7 @@ const App = () => {
     const [score, setScore] = useState(0);
 
     const checkAnswer = (answerIndex) => {
-        if (answerIndex == quiz.indexOfCorrectAnswer) {
+        if (answerIndex === quiz.indexOfCorrectAnswer) {
             alert("Correct");
             setScore(score + 1);
             setQuiz(getRandomQuiz(1)[0]);
@@ -47,7 +47,7 @@ const App = () => {
 //     }
 
 //     checkAnswer(answerIndex) {
-//         if (answerIndex == this.state.quiz.indexOfCorrectAnswer) {
+//         if (answerIndex === this.state.quiz.indexOfCorrectAnswer) {
 //             alert("Correct!!");
 //             this.setState((prevState) => ({
 //                 quiz: getRandomQuiz(1)[0],
