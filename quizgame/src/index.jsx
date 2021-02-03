@@ -13,7 +13,7 @@ const App = () => {
             setScore(score + 1);
             setQuiz(getRandomQuiz(1)[0]);
         } else {
-            alert("Try again");
+            alert("Try again!");
         }
     };
 
