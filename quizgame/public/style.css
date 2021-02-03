@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 50%;
+    align-items: center;
+}
+
+.heading {
+    font-size: 4em;
+    margin: 2rem 0;
+}
+
+.question {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+.answer {
+    background-color: #ebe9e4;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #787774;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.score {
+    text-align: center;
+}
