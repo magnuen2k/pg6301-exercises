@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {getRandomQuiz} from "./quizzes";
 
-const Match = () => {
+/*const Match = () => {
     const [quiz, setQuiz] = useState(getRandomQuiz(1)[0]);
     const [score, setScore] = useState(0);
 
@@ -32,10 +32,10 @@ const Match = () => {
     );
 };
 
-export default Match;
+export default Match;*/
 
 // CLASS COMPONENT VERSION
-/*export class App extends React.Component {
+export class Match extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -59,18 +59,18 @@ export default Match;
     render() {
         return (
             <div className="container">
-                <h2>{this.state.quiz.question}</h2>
-                    {this.state.quiz.answers.map((answer, index) => (
-                        <button
-                            className="answer"
-                            key={index}
-                            onClick={() => this.checkAnswer(index)}
-                        >
-                            {answer}
-                        </button>
-                    ))}
+                <h2 className="question">{this.state.quiz.question}</h2>
+                {this.state.quiz.answers.map((answer, index) => (
+                    <button
+                        className="answer"
+                        key={index}
+                        onClick={() => this.checkAnswer(index)}
+                    >
+                        {answer}
+                    </button>
+                ))}
                 <div className="score">Score: {this.state.score}</div>
             </div>
         );
     }
-}*/
+}

@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Match from "./match";
+import {Match} from "./match";
 
 // FUNCTIONAL COMPONENT VERSION
 const App = () => {
     return (
-        <div>
-            <Match/>
-        </div>
+
+        <Match/>
+
     );
 };
 
