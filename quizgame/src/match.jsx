@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {getRandomQuiz} from "./quizzes";
 
-/*const Match = () => {
+export const Match = () => {
     const [quiz, setQuiz] = useState(getRandomQuiz(1)[0]);
     const [score, setScore] = useState(0);
 
@@ -32,10 +32,10 @@ import {getRandomQuiz} from "./quizzes";
     );
 };
 
-export default Match;*/
+//export default Match;
 
 // CLASS COMPONENT VERSION
-export class Match extends React.Component {
+/*export class Match extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -73,4 +73,4 @@ export class Match extends React.Component {
             </div>
         );
     }
-}
+}*/

@@ -5,9 +5,7 @@ import {Match} from "./match";
 // FUNCTIONAL COMPONENT VERSION
 const App = () => {
     return (
-
         <Match/>
-
     );
 };
 
