@@ -1,4 +1,4 @@
-const { getRandomQuiz } = require("../src/quizzes");
+const { getRandomQuiz } = require("../src/client/quizzes");
 
 test("Test get random quiz", () => {
     const quiz = getRandomQuiz(1)[0];
