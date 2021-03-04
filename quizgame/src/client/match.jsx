@@ -1,24 +1,80 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {getRandomQuiz} from "./quizzes";
 
 export const Match = () => {
-    const [quiz, setQuiz] = useState(getRandomQuiz(1)[0]);
-    const [score, setScore] = useState(0);
+    const [match, setMatch] = useState(null);
+
+    useEffect(() => {
+        startNewMatch();
+    }, [])
+
+    const startNewMatch = () => {
+        const quiz = getRandomQuiz(2);
+        setMatch({
+            victory: false,
+            defeat: false,
+            quizzes: quiz,
+            currentIndex: 0,
+            numberOfQuizzes: quiz.length,
+            score: 0
+        })
+    }
 
     const checkAnswer = (answerIndex) => {
-        if (answerIndex === quiz.indexOfCorrectAnswer) {
+        if (answerIndex === match.quizzes[match.currentIndex].indexOfCorrectAnswer) {
             alert("Correct");
-            setScore(score + 1);
-            setQuiz(getRandomQuiz(1)[0]);
+            if (match.currentIndex === match.numberOfQuizzes - 1) {
+                setMatch({...match, victory: true, score: match.score + 1})
+            } else {
+                setMatch({
+                    currentIndex: match.currentIndex + 1,
+                    quizzes: match.quizzes,
+                    numberOfQuizzes: match.numberOfQuizzes,
+                    score: match.score + 1
+                });
+            }
+            //setMatch({score: match.score + 1});
+            //setQuiz(getRandomQuiz(1)[0]);
         } else {
             alert("Try again!");
+            setMatch({defeat: true});
         }
     };
 
+    if (!match) {
+        // Do this to make sure match state is set by useEffect, if not the match state will be null
+        return (
+            <h2>Loading...</h2>
+        )
+    }
+
+    if (match.victory) {
+        return (
+            <div className="game-result">
+                <div className="score">Score: {match.score}</div>
+                <h2>You Won!</h2>
+                <div className="action">
+                    <button className="play new-game-button" onClick={startNewMatch}>New Match</button>
+                </div>
+            </div>
+        )
+    }
+
+    if (match.defeat) {
+        return (
+            <div className="game-result">
+                <h2>Wrong Answer! You Lost!</h2>
+                <div className="action">
+                    <button className="play new-game-button" onClick={startNewMatch}>New Match</button>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="container">
-            <h2 className="question">{quiz.question}</h2>
-            {quiz.answers.map((answer, index) => (
+            <h2 className="question">{match.quizzes[match.currentIndex].question}</h2>
+            {match.quizzes[match.currentIndex].answers.map((answer, index) => (
                 <button
                     className="answer"
                     key={index}
@@ -27,50 +83,7 @@ export const Match = () => {
                     {answer}
                 </button>
             ))}
-            <div className="score">Score: {score}</div>
+            <div className="score">Score: {match.score}</div>
         </div>
     );
 };
-
-//export default Match;
-
-// CLASS COMPONENT VERSION
-/*export class Match extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            quiz: getRandomQuiz(1)[0],
-            score: 0,
-        };
-    }
-
-    checkAnswer(answerIndex) {
-        if (answerIndex === this.state.quiz.indexOfCorrectAnswer) {
-            alert("Correct!!");
-            this.setState((prevState) => ({
-                quiz: getRandomQuiz(1)[0],
-                score: prevState.score + 1,
-            }));
-        } else {
-            alert("Wrrrrong!!");
-        }
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <h2 className="question">{this.state.quiz.question}</h2>
-                {this.state.quiz.answers.map((answer, index) => (
-                    <button
-                        className="answer"
-                        key={index}
-                        onClick={() => this.checkAnswer(index)}
-                    >
-                        {answer}
-                    </button>
-                ))}
-                <div className="score">Score: {this.state.score}</div>
-            </div>
-        );
-    }
-}*/
