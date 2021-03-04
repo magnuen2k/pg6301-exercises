@@ -24,7 +24,7 @@ export const Match = () => {
         if (answerIndex === match.quizzes[match.currentIndex].indexOfCorrectAnswer) {
             alert("Correct");
             if (match.currentIndex === match.numberOfQuizzes - 1) {
-                setMatch({...match, victory: true})
+                setMatch({...match, victory: true, score: match.score + 1})
             } else {
                 setMatch({
                     currentIndex: match.currentIndex + 1,
