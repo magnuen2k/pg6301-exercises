@@ -5,11 +5,19 @@
             "@babel/plugin-proposal-class-properties"
         ],
         "presets": [
-            "@babel/env",
+            [
+                "@babel/env",
+                {
+                    "targets": {
+                        "node": "current"
+                    }
+                }
+            ],
             "@babel/react"
         ]
     },
     "dependencies": {
+        "express": "4.17.1",
         "react": "16.12.0",
         "react-dom": "16.12.0",
         "react-router-dom": "5.2.0"
