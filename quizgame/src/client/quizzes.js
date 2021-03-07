@@ -28,7 +28,7 @@ export const getRandomQuiz = async (numberOfQuizzes) => {
         return {
             question: q.question,
             answers: answers,
-            indexOfRightAnswer: correct,
+            indexOfCorrectAnswer: correct,
             id: 0
         }
     });
