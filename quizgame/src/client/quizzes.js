@@ -12,8 +12,28 @@ const quizzes = [
 ];
 
 // Should take number of quizzes as input
-export const getRandomQuiz = (numberOfQuizzes) => {
-    if (numberOfQuizzes < 1) {
+export const getRandomQuiz = async (numberOfQuizzes) => {
+
+    const url = "https://opentdb.com/api.php?amount=" + numberOfQuizzes + "&category=21&difficulty=medium&type=multiple"
+
+    let response = await fetch(url);
+    let data = await response.json();
+    //console.log(data.results);
+
+    return data.results.map(q => {
+        const correct = Math.floor(Math.random() * Math.floor(3));
+        const answers = q.incorrect_answers;
+        answers.splice(correct, 0, q.correct_answer);
+
+        return {
+            question: q.question,
+            answers: answers,
+            indexOfRightAnswer: correct,
+            id: 0
+        }
+    });
+
+    /*if (numberOfQuizzes < 1) {
         throw "Invalid number of requested quizzes: " + n;
     }
 
@@ -34,5 +54,5 @@ export const getRandomQuiz = (numberOfQuizzes) => {
         i++;
     }
 
-    return Array.from(selection).map((e) => quizzes[e]);
+    return Array.from(selection).map((e) => quizzes[e]);*/
 };

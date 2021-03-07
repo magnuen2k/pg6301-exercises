@@ -3,13 +3,19 @@ import {getRandomQuiz} from "./quizzes";
 
 export const Match = () => {
     const [match, setMatch] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         startNewMatch();
     }, [])
 
-    const startNewMatch = () => {
-        const quiz = getRandomQuiz(2);
+    const startNewMatch = async () => {
+        const quiz = await getRandomQuiz(3);
+        console.log("Dette er quizen: " + quiz);
+        if (!quiz) {
+            setError("Error connecting to server");
+        }
+        setError(null);
         setMatch({
             victory: false,
             defeat: false,
@@ -22,7 +28,6 @@ export const Match = () => {
 
     const checkAnswer = (answerIndex) => {
         if (answerIndex === match.quizzes[match.currentIndex].indexOfCorrectAnswer) {
-            alert("Correct");
             if (match.currentIndex === match.numberOfQuizzes - 1) {
                 setMatch({...match, victory: true, score: match.score + 1})
             } else {
@@ -33,16 +38,19 @@ export const Match = () => {
                     score: match.score + 1
                 });
             }
-            //setMatch({score: match.score + 1});
-            //setQuiz(getRandomQuiz(1)[0]);
         } else {
-            alert("Try again!");
             setMatch({defeat: true});
         }
     };
 
+
+    // If we didnt get a quiz, we display the error
+    if (error) {
+        return <h2>{error}</h2>
+    }
+
+    // Do this to make sure match state is set by useEffect, if not the match state will be null
     if (!match) {
-        // Do this to make sure match state is set by useEffect, if not the match state will be null
         return (
             <h2>Loading...</h2>
         )
