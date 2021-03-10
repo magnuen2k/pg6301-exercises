@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from "react";
-import {getRandomQuiz} from "./quizzes";
+import React, {useEffect, useState} from "react";
 
 export const Match = () => {
     const [match, setMatch] = useState(null);
@@ -10,7 +9,7 @@ export const Match = () => {
     }, [])
 
     const startNewMatch = async () => {
-        const quiz = await getRandomQuiz(3);
+        const quiz = await getRandomQuizzes();
         console.log("Dette er quizen: " + quiz);
         if (!quiz) {
             setError("Error connecting to server");
@@ -24,6 +23,17 @@ export const Match = () => {
             numberOfQuizzes: quiz.length,
             score: 0
         })
+    }
+
+    const getRandomQuizzes = async () => {
+        const url = "/api/randomQuizzes/2";
+
+        try {
+            let res = await fetch(url);
+            return await res.json();
+        } catch (e) {
+            setError(e);
+        }
     }
 
     const checkAnswer = (answerIndex) => {
