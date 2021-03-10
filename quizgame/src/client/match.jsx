@@ -28,8 +28,12 @@ export const Match = () => {
     const getRandomQuizzes = async () => {
         const url = "/api/randomQuizzes";
 
-        let res = await fetch(url);
-        return await res.json();
+        try {
+            let res = await fetch(url);
+            return await res.json();
+        } catch (e) {
+            setError(e);
+        }
     }
 
     const checkAnswer = (answerIndex) => {
