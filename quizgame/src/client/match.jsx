@@ -10,7 +10,7 @@ export const Match = () => {
     }, [])
 
     const startNewMatch = async () => {
-        const quiz = await getRandomQuiz(3);
+        const quiz = await getRandomQuizzes();
         console.log("Dette er quizen: " + quiz);
         if (!quiz) {
             setError("Error connecting to server");
@@ -24,6 +24,15 @@ export const Match = () => {
             numberOfQuizzes: quiz.length,
             score: 0
         })
+    }
+
+    const getRandomQuizzes = async () => {
+        const url = "/api/quizzes";
+
+        let res = await fetch(url, {method: "post"});
+        let payload = await res.json();
+
+        return payload;
     }
 
     const checkAnswer = (answerIndex) => {

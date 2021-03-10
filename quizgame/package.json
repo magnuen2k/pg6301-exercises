@@ -1,6 +1,7 @@
 {
     "author": "Magnus Enholm",
     "dependencies": {
+        "body-parser": "^1.19.0",
         "express": "^4.17.1",
         "parcel": "1.12.3",
         "react": "^17.0.1",
