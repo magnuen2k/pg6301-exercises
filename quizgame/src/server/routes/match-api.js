@@ -3,7 +3,7 @@ const {getRandomQuizzes} = require("../db/quizzes");
 
 const router = express.Router();
 
-router.post("/quizzes", (req, res, next) => {
+router.get("/quizzes", (req, res, next) => {
     const payload = getRandomQuizzes(2);
 
     res.status(201).json(payload);

@@ -29,7 +29,7 @@ export const Match = () => {
     const getRandomQuizzes = async () => {
         const url = "/api/quizzes";
 
-        let res = await fetch(url, {method: "post"});
+        let res = await fetch(url);
         let payload = await res.json();
 
         return payload;
