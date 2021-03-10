@@ -26,7 +26,7 @@ export const Match = () => {
     }
 
     const getRandomQuizzes = async () => {
-        const url = "/api/randomQuizzes";
+        const url = "/api/randomQuizzes/2";
 
         try {
             let res = await fetch(url);
