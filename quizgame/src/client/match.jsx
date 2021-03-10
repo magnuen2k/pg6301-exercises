@@ -89,6 +89,7 @@ export const Match = () => {
                     onClick={() => checkAnswer(index)}
                 >
                     {answer}
+                    {index}
                 </button>
             ))}
             <div className="score">Score: {match.score}</div>
