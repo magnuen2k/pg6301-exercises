@@ -38,4 +38,9 @@ const getRandomQuizzes = (numberOfQuizzes) => {
     return Array.from(selection).map((e) => quizzes[e]);
 };
 
-module.exports = {quizzes, getRandomQuizzes};
+// Return all quizzes in the database
+const getAllQuizzes = () => {
+    return quizzes;
+}
+
+module.exports = {getAllQuizzes, getRandomQuizzes};

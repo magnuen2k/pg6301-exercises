@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from "react";
-import {getRandomQuiz} from "./quizzes";
+import React, {useEffect, useState} from "react";
 
 export const Match = () => {
     const [match, setMatch] = useState(null);
@@ -27,12 +26,10 @@ export const Match = () => {
     }
 
     const getRandomQuizzes = async () => {
-        const url = "/api/quizzes";
+        const url = "/api/randomQuizzes";
 
         let res = await fetch(url);
-        let payload = await res.json();
-
-        return payload;
+        return await res.json();
     }
 
     const checkAnswer = (answerIndex) => {

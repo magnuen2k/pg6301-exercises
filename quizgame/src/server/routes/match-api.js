@@ -1,12 +1,15 @@
 const express = require('express');
-const {getRandomQuizzes} = require("../db/quizzes");
+const {getRandomQuizzes, getAllQuizzes} = require("../db/quizzes");
 
 const router = express.Router();
 
-router.get("/quizzes", (req, res, next) => {
+router.get("/randomQuizzes", (req, res, next) => {
     const payload = getRandomQuizzes(2);
+    res.status(200).json(payload);
+})
 
-    res.status(201).json(payload);
+router.get("/allQuizzes", (req, res, next) => {
+    res.status(200).json(getAllQuizzes());
 })
 
 module.exports = router;
