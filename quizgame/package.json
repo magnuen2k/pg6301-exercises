@@ -11,16 +11,18 @@
     },
     "devDependencies": {
         "concurrently": "^6.0.0",
-        "nodemon": "^2.0.7"
+        "nodemon": "^2.0.7",
+        "prettier": "^2.2.1"
     },
     "license": "LGPL-3.0",
     "main": "index.js",
     "name": "part-03",
     "repository": {},
     "scripts": {
-        "start": "concurrently \"yarn run server\" \"yarn run parcel\"",
+        "start": "concurrently \"npm run server\" \"npm run parcel\"",
         "server": "nodemon --watch src/server src/server/server.js",
-        "parcel": "parcel watch public/index.html"
+        "parcel": "parcel watch public/index.html",
+        "format": "prettier --write src/"
     },
     "browserslist": [
         "last 1 Chrome version"

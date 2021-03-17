@@ -1,39 +1,41 @@
 const quizzes = [
-    {
-        question: "Whats nine plus ten?",
-        answers: [30, 21, 19, 50],
-        indexOfCorrectAnswer: 1,
-    },
-    {
-        question: "Best CS:GO pro",
-        answers: ["Brax", "Simple", "Coldzera", "M0E TV"],
-        indexOfCorrectAnswer: 0,
-    },
+  {
+    question: "Whats nine plus ten?",
+    answers: [30, 21, 19, 50],
+    indexOfCorrectAnswer: 1,
+  },
+  {
+    question: "Best CS:GO pro",
+    answers: ["Brax", "Simple", "Coldzera", "M0E TV"],
+    indexOfCorrectAnswer: 0,
+  },
 ];
 
 // Should take number of quizzes as input
 export const getRandomQuiz = async (numberOfQuizzes) => {
+  const url =
+    "https://opentdb.com/api.php?amount=" +
+    numberOfQuizzes +
+    "&category=21&difficulty=medium&type=multiple";
 
-    const url = "https://opentdb.com/api.php?amount=" + numberOfQuizzes + "&category=21&difficulty=medium&type=multiple"
+  let response = await fetch(url);
+  let data = await response.json();
+  //console.log(data.results);
 
-    let response = await fetch(url);
-    let data = await response.json();
-    //console.log(data.results);
+  return data.results.map((q) => {
+    const correct = Math.floor(Math.random() * Math.floor(3));
+    const answers = q.incorrect_answers;
+    answers.splice(correct, 0, q.correct_answer);
 
-    return data.results.map(q => {
-        const correct = Math.floor(Math.random() * Math.floor(3));
-        const answers = q.incorrect_answers;
-        answers.splice(correct, 0, q.correct_answer);
+    return {
+      question: q.question,
+      answers: answers,
+      indexOfCorrectAnswer: correct,
+      id: 0,
+    };
+  });
 
-        return {
-            question: q.question,
-            answers: answers,
-            indexOfCorrectAnswer: correct,
-            id: 0
-        }
-    });
-
-    /*if (numberOfQuizzes < 1) {
+  /*if (numberOfQuizzes < 1) {
         throw "Invalid number of requested quizzes: " + n;
     }
 
